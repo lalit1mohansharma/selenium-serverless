@@ -7,12 +7,15 @@ app = Flask(__name__)
 
 
 def _create_driver(w, h):
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('window-size={}x{}'.format(w, h))
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    return webdriver.Chrome('chromedriver', options=chrome_options)
+    try:
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('window-size={}x{}'.format(w, h))
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        return webdriver.Chrome('chromedriver', options=chrome_options)
+    except Exception as e:
+        print(f"Exception: {str(e)}")
 
 
 @app.route('/')
